@@ -5,10 +5,15 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no tests are implemented yet \" && exit 1"
+    "test": "node --experimental-vm-modules node_modules/.bin/jest",
+    "test:coverage": "node --experimental-vm-modules node_modules/.bin/jest --coverage",
+    "coverage": "node --experimental-vm-modules node_modules/.bin/jest --coverage && cat ./coverage/lcov.info | coveralls"
   },
   "author": "",
   "license": "MIT",
-  "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "coveralls": "^3.1.1",
+    "jest": "^30.2.0"
+  }
 }
