@@ -1,61 +1,65 @@
 # AI-Generated Test Suite
 
-**Approach:** AI-assisted test generation using Claude Code
+**Approach:** AI-assisted test generation using Claude/Cursor AI
+
+## Purpose
+
+This test suite contains AI-generated unit tests for the **two functions pre-planned in Phase 1** of the assignment:
+
+1. **isEmpty** - Checks if value is an empty object, collection, map, or set
+2. **toNumber** - Converts value to a number
+
+These tests are separate from the self-designed tests to allow comparison between human-designed and AI-generated test approaches.
 
 ## Test Generation Method
 
-This test suite was generated using Claude Code (Anthropic's AI assistant) with the following systematic approach:
+### Prompt Strategy
 
-### 1. **Function Analysis**
-- Read and analyzed each of the 10 priority utility functions
-- Understood function signatures, parameters, return types, and expected behavior
-- Identified edge cases, error conditions, and boundary conditions
-- Examined dependencies and internal function calls
+The AI was provided with:
+1. The Phase 1 test plan containing specific test cases for each function
+2. The source code of the functions to understand implementation details
+3. Instructions to generate comprehensive Jest test suites
 
-### 2. **Test Structure Design**
-- Used Jest testing framework with ES modules configuration
-- Organized tests into logical groups using `describe` blocks
-- Followed AAA (Arrange-Act-Assert) pattern for test structure
-- Created comprehensive test coverage for each function
+### Example Prompts Used
 
-### 3. **Test Case Categories**
-For each function, generated tests covering:
-- **Normal cases**: Typical usage with expected inputs
-- **Edge cases**: Empty inputs, null/undefined values, boundary conditions  
-- **Error conditions**: Invalid inputs, type mismatches
-- **E-commerce contexts**: Realistic scenarios for product search, cart management, validation
-- **Performance considerations**: Large inputs, complex data structures
+**For isEmpty:**
+> "Generate Jest unit tests for the isEmpty function based on these test cases from our test plan: [test cases 1.1-1.9]. Also add additional edge cases you think are important."
 
-### 4. **AI Generation Process**
-1. **Initial Test Creation**: Generated comprehensive test suites based on function documentation and behavior analysis
-2. **Iterative Refinement**: Fixed test expectations based on actual function behavior through test execution
-3. **Mock Replacement**: Replaced Jest mocks with custom tracking functions for better ES module compatibility
-4. **Expectation Adjustment**: Updated test assertions to match actual function outputs rather than assumptions
+**For toNumber:**
+> "Generate Jest unit tests for the toNumber function based on these test cases from our test plan: [test cases 2.1-2.10]. Include edge cases for special values and error conditions."
 
-### 5. **Coverage Optimization**
-- Configured Jest to focus coverage on the 10 priority functions only
-- Excluded `.internal` directory as per project requirements  
-- Achieved high coverage metrics: 98.61% statements, 88.73% branches, 100% functions
+## Test Case Coverage
 
-### 6. **Test Quality Assurance**
-- All 120 tests passing across 10 test suites
-- Functions tested comprehensively with realistic e-commerce data
-- Tests validate both positive and negative scenarios
-- Edge cases thoroughly covered for robust validation
+### isEmpty (11 tests)
+- Null and undefined handling
+- Primitive values (boolean, number, NaN)
+- Empty and non-empty strings
+- Empty and non-empty arrays
+- Empty and non-empty objects
+- Map and Set objects
+- Functions
 
-## Key Benefits of AI-Generated Tests
+### toNumber (14 tests)
+- Number passthrough
+- Special values (Infinity, NaN)
+- String number conversion
+- Whitespace handling
+- Binary and octal string conversion
+- Hexadecimal handling (including bad hex)
+- Boolean conversion
+- Null and undefined
+- Symbol handling
+- Objects with valueOf
 
-1. **Comprehensive Coverage**: AI can quickly generate extensive test cases covering multiple scenarios
-2. **Systematic Approach**: Consistent test structure and naming conventions across all functions
-3. **Edge Case Discovery**: AI identifies potential edge cases that might be overlooked in manual testing
-4. **Rapid Development**: Fast test suite creation allows more time for test refinement and analysis
-5. **Documentation Value**: Tests serve as living documentation of expected function behavior
+## Oracle Used
 
-## Test Suite Statistics
+The expected results were determined by:
+1. The Phase 1 test plan specifications
+2. Function documentation and JSDoc comments
+3. Lodash library documentation (as the source is based on Lodash)
 
-- **Total Tests**: 120 tests across 10 functions (average 12 tests per function)
-- **Coverage Achieved**: >98% statements, >88% branches for priority functions
-- **Test Categories**: Normal cases, edge cases, error handling, e-commerce scenarios
-- **Framework**: Jest with ES modules support and coverage reporting
+## Framework
 
-This AI-generated approach demonstrates how AI assistance can accelerate test development while maintaining high quality and comprehensive coverage for critical utility functions in an e-commerce application context.
+- **Testing Framework**: Jest with ES modules support
+- **Test Structure**: Describe blocks with individual test cases
+- **Assertion Style**: Jest expect() matchers
